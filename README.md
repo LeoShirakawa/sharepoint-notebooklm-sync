@@ -111,6 +111,16 @@ graph TD
       --memory 1Gi
     ```
 
+## 手動での同期トリガー
+
+デプロイされたCloud Runサービスは、HTTP POSTリクエストを受信することで同期処理を開始します。手動で同期をトリガーするには、以下の`curl`コマンドを使用します。
+
+```bash
+curl -X POST -w '\nHTTP Status: %{http_code}\n' https://YOUR_CLOUD_RUN_SERVICE_URL/sync
+```
+
+-   `YOUR_CLOUD_RUN_SERVICE_URL`は、Cloud Runサービスをデプロイした際に払い出されるURLに置き換えてください。
+
 ## DWD (Domain-Wide Delegation) 設定
 
 NotebookLM APIはユーザー権限でのみ操作可能なため、サービスアカウントがユーザーアカウントを偽装するドメイン全体の委任（DWD）を設定する必要があります。

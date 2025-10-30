@@ -1,0 +1,7 @@
+Flask==3.0.3
+gunicorn==22.0.0
+google-auth==2.38.0
+google-cloud-iam==2.20.0
+requests==2.31.0
+msal==1.28.0
+google-cloud-firestore==2.16.0

@@ -96,10 +96,14 @@ def create_source(notebook_id: str, file_content: bytes, file_name: str):
     # Special URL for file uploads
     upload_url = f"https://global-discoveryengine.googleapis.com/upload/v1alpha/projects/{config.PROJECT_NUMBER}/locations/{config.NOTEBOOK_LOCATION}/notebooks/{notebook_id}/sources:uploadFile"
     
+    # Encode the filename using 'unicode-escape' to handle non-ASCII characters safely.
+    # This creates a pure ASCII string that avoids encoding errors in the HTTP client.
+    safe_header_filename = file_name.encode('unicode-escape').decode('ascii')
+
     headers = {
         "Authorization": f"Bearer {creds.token}",
         "Content-Type": mime_type,
-        "X-Goog-Upload-File-Name": file_name, # Use the raw, un-encoded filename
+        "X-Goog-Upload-File-Name": safe_header_filename,
         "X-Goog-Upload-Protocol": "raw"
     }
 

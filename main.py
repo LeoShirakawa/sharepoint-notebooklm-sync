@@ -102,6 +102,8 @@ def sync_notebook():
 
                 if status == 'SOURCE_STATUS_COMPLETE':
                     print(f"Source processing complete for {file_name}.")
+                    # Override the displayName with the original filename to ensure consistency with Firestore.
+                    source_details['displayName'] = file_name
                     firestore_client.add_source(source_details)
                     created_count += 1
                     is_processed = True
